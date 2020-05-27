@@ -1,0 +1,40 @@
+﻿<Window x:Class="MeetingScheduler.UI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MeetingScheduler.UI"
+        xmlns:view="clr-namespace:MeetingScheduler.UI.View"
+        xmlns:viewModel="clr-namespace:MeetingScheduler.UI.ViewModel"
+        mc:Ignorable="d"
+        Title="MeetingScheduler" Height="350" Width="525" FontSize="20">
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type viewModel:PersonDetailViewModel}">
+            <view:PersonDetailView/>
+        </DataTemplate>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Menu Grid.ColumnSpan="2" FontSize="20">
+            <MenuItem Header="Create">
+                <MenuItem Header="New Person" Command="{Binding CreateNewPersonCommand}"/>
+            </MenuItem>
+        </Menu>
+        
+        <view:NavigationView Grid.Row="1" DataContext="{Binding NavigationViewModel}"/>
+        <ContentControl Grid.Row="1" Grid.Column="1" 
+                               Content="{Binding PersonDetailViewModel}" />
+
+
+
+    </Grid>
+</Window>
